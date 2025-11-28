@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Showdown: Java vs Go vs Python</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <header>
+        <h1>Choose Your Weapon</h1>
+        <p class="subtitle">A modern comparison of today's backend giants</p>
+    </header>
+
+    <main>
+        <div class="cards-container">
+            <!-- Java Card -->
+            <div class="card java" id="java-card">
+                <div class="card-header">
+                    <div class="icon">☕</div>
+                    <h2>Java</h2>
+                </div>
+                <div class="card-content">
+                    <p class="tagline">The Enterprise Titan</p>
+                    <ul class="pros">
+                        <li>Robust Ecosystem</li>
+                        <li>Strong Typing</li>
+                        <li>Multithreading</li>
+                    </ul>
+                    <button class="details-btn" onclick="showDetails('java')">Explore</button>
+                </div>
+            </div>
+
+            <!-- Go Card -->
+            <div class="card go" id="go-card">
+                <div class="card-header">
+                    <div class="icon">🐹</div>
+                    <h2>Go</h2>
+                </div>
+                <div class="card-content">
+                    <p class="tagline">The Cloud Native Speedster</p>
+                    <ul class="pros">
+                        <li>Simplicity</li>
+                        <li>Concurrency (Goroutines)</li>
+                        <li>Fast Compilation</li>
+                    </ul>
+                    <button class="details-btn" onclick="showDetails('go')">Explore</button>
+                </div>
+            </div>
+
+            <!-- Python Card -->
+            <div class="card python" id="python-card">
+                <div class="card-header">
+                    <div class="icon">🐍</div>
+                    <h2>Python</h2>
+                </div>
+                <div class="card-content">
+                    <p class="tagline">The Data Science Wizard</p>
+                    <ul class="pros">
+                        <li>Readability</li>
+                        <li>Massive Libraries</li>
+                        <li>Versatility</li>
+                    </ul>
+                    <button class="details-btn" onclick="showDetails('python')">Explore</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="comparison-table-section">
+            <h2>Head-to-Head Comparison</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="java-col">Java</th>
+                            <th class="go-col">Go</th>
+                            <th class="python-col">Python</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Performance</td>
+                            <td>High (JIT Compiled)</td>
+                            <td>Very High (Native)</td>
+                            <td>Low (Interpreted)</td>
+                        </tr>
+                        <tr>
+                            <td>Concurrency</td>
+                            <td>Threads (OS managed)</td>
+                            <td>Goroutines (Lightweight)</td>
+                            <td>AsyncIO / Threads (GIL limited)</td>
+                        </tr>
+                        <tr>
+                            <td>Memory Management</td>
+                            <td>Garbage Collection (Heavy)</td>
+                            <td>Garbage Collection (Efficient)</td>
+                            <td>Reference Counting + GC</td>
+                        </tr>
+                        <tr>
+                            <td>Typing</td>
+                            <td>Static (Strong)</td>
+                            <td>Static (Strong)</td>
+                            <td>Dynamic (Strong)</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment</td>
+                            <td>JAR/WAR (Requires JVM)</td>
+                            <td>Single Static Binary</td>
+                            <td>Source + Dependencies / Docker</td>
+                        </tr>
+                        <tr>
+                            <td>Learning Curve</td>
+                            <td>Moderate</td>
+                            <td>Low (Simple syntax)</td>
+                            <td>Very Low (Beginner friendly)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="details-overlay" class="hidden">
+            <div class="details-modal">
+                <button class="close-btn" onclick="closeDetails()">×</button>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Built with 💖 by Antigravity</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
