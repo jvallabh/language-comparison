@@ -6,14 +6,17 @@ A premium, interactive web page comparing three of the most popular backend prog
 
 This project provides a visual and interactive comparison of these languages, highlighting their:
 -   **Pros & Cons**: Detailed breakdowns of strengths and weaknesses.
--   **Code Examples**: Real-world syntax snippets to illustrate differences.
+-   **Code Examples**: Real-world syntax snippets across multiple categories.
 -   **Use Cases**: Best scenarios for each language.
 -   **Head-to-Head Comparison**: A side-by-side table covering performance, concurrency, memory management, and more.
 
 ## Features
 
 -   **Interactive Cards**: Click "Explore" to reveal deep dives into each language.
--   **Rich Content**: Modals with descriptions and syntax-highlighted code blocks.
+-   **Tabbed Modals**: Each language modal has an Overview tab (pros/cons/use cases) and a Code Examples tab.
+-   **Code Example Categories**: Browse HTTP Server, File I/O, Concurrency, Error Handling, and JSON Parsing snippets per language.
+-   **Side-by-Side Code Comparison**: Select a topic to see all three languages' implementations displayed simultaneously.
+-   **Copy to Clipboard**: One-click copy on every code block.
 -   **Comparison Table**: A comprehensive grid for quick reference.
 -   **Premium Design**: Dark mode aesthetic, glassmorphism effects, and smooth animations.
 -   **Responsive**: Optimized for desktop and mobile viewing.
