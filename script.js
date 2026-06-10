@@ -421,7 +421,7 @@ function showDetails(lang) {
         <li class="detail-item">
             <strong>${item.text}</strong>
             <p class="description">${item.description}</p>
-            ${item.example ? `<pre class="code-snippet"><code>${escapeHtml(item.example)}</code></pre>` : ''}
+            ${item.example ? `<pre class="code-snippet"><code class="language-${lang}">${escapeHtml(item.example)}</code></pre>` : ''}
         </li>
     `).join('');
 
@@ -459,6 +459,7 @@ function showDetails(lang) {
         </div>
     `;
 
+    modalContent.querySelectorAll('.code-snippet code').forEach(el => hljs.highlightElement(el));
     renderCodeBlock('code-display-' + lang, lang, categories[0]);
     document.getElementById('details-overlay').classList.remove('hidden');
 }
@@ -489,8 +490,9 @@ function renderCodeBlock(containerId, lang, category) {
             <span class="lang-label ${lang}-label">${langDisplayName(lang)}</span>
             <button class="copy-btn" onclick="copyCode(this)" title="Copy to clipboard">${ICON_COPY}</button>
         </div>
-        <pre class="code-block"><code>${escapeHtml(getCode(category, lang))}</code></pre>
+        <pre class="code-block"><code class="language-${lang}">${escapeHtml(getCode(category, lang))}</code></pre>
     `;
+    hljs.highlightElement(container.querySelector('code'));
 }
 
 const ICON_COPY = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
@@ -570,9 +572,10 @@ function showComparison(category, clickedBtn) {
                 <span class="lang-label ${lang}-label">${langDisplayName(lang)}</span>
                 <button class="copy-btn" onclick="copyCode(this)" title="Copy to clipboard">${ICON_COPY}</button>
             </div>
-            <pre class="code-block"><code>${escapeHtml(getCode(category, lang))}</code></pre>
+            <pre class="code-block"><code class="language-${lang}">${escapeHtml(getCode(category, lang))}</code></pre>
         </div>
     `).join('');
+    grid.querySelectorAll('code').forEach(el => hljs.highlightElement(el));
 }
 
 initComparison();

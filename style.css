@@ -562,8 +562,14 @@ footer {
     line-height: 1.65;
 }
 
-.code-block code {
+.code-block code,
+.code-snippet code {
     color: #a5b4fc;
+}
+
+.hljs {
+    background: transparent;
+    padding: 0;
 }
 
 /* ── Side-by-Side Comparison Section ──────────── */
