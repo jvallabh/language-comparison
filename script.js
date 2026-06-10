@@ -461,7 +461,9 @@ function showDetails(lang) {
 
     modalContent.querySelectorAll('.code-snippet code').forEach(el => hljs.highlightElement(el));
     renderCodeBlock('code-display-' + lang, lang, categories[0]);
-    document.getElementById('details-overlay').classList.remove('hidden');
+    const overlay = document.getElementById('details-overlay');
+    overlay.classList.remove('closing');
+    overlay.classList.remove('hidden');
 }
 
 function showTab(panel, lang, clickedBtn) {
@@ -530,7 +532,14 @@ function fallbackCopy(text, callback) {
 }
 
 function closeDetails() {
-    document.getElementById('details-overlay').classList.add('hidden');
+    const overlay = document.getElementById('details-overlay');
+    if (overlay.classList.contains('hidden') || overlay.classList.contains('closing')) return;
+    overlay.classList.add('closing');
+    overlay.addEventListener('animationend', () => {
+        if (!overlay.classList.contains('closing')) return;
+        overlay.classList.remove('closing');
+        overlay.classList.add('hidden');
+    }, { once: true });
 }
 
 document.getElementById('details-overlay').addEventListener('click', (e) => {
