@@ -651,6 +651,31 @@ footer {
     border-color: var(--interactive-border-active);
 }
 
+.swipe-hint {
+    display: none;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 0.6rem;
+}
+
+.comparison-grid-scroll {
+    position: relative;
+}
+
+.comparison-grid-scroll::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 48px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--bg-color));
+    pointer-events: none;
+    border-radius: 0 12px 12px 0;
+    display: none;
+}
+
 .comparison-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -680,8 +705,26 @@ footer {
 }
 
 @media (max-width: 900px) {
+    .comparison-grid-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.5rem;
+    }
+
+    .comparison-grid-scroll::after {
+        display: block;
+    }
+
     .comparison-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, calc(100vw - 3rem));
+    }
+
+    .comparison-col .code-block {
+        overflow-x: hidden;
+    }
+
+    .swipe-hint {
+        display: block;
     }
 }
 
