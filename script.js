@@ -601,3 +601,131 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
     applyTheme(current === 'dark' ? 'light' : 'dark');
 });
+
+// ── Decision Quiz ────────────────────────────────────────────────────────────
+
+const quizQuestions = [
+    {
+        text: 'What are you building?',
+        options: [
+            { label: 'Web API or microservice',   scores: { java: 1, go: 3, python: 1 } },
+            { label: 'Data pipeline or ML model', scores: { java: 1, go: 0, python: 3 } },
+            { label: 'Enterprise or Android app', scores: { java: 3, go: 1, python: 1 } },
+            { label: 'CLI tool or system utility', scores: { java: 0, go: 3, python: 1 } },
+        ],
+    },
+    {
+        text: "What's your top priority?",
+        options: [
+            { label: 'Maximum performance',       scores: { java: 2, go: 3, python: 0 } },
+            { label: 'Fast development cycle',    scores: { java: 0, go: 1, python: 3 } },
+            { label: 'Battle-tested ecosystem',   scores: { java: 3, go: 1, python: 2 } },
+            { label: 'Simple cloud deployment',   scores: { java: 1, go: 3, python: 1 } },
+        ],
+    },
+    {
+        text: "Who's on your team?",
+        options: [
+            { label: 'Large enterprise team',     scores: { java: 3, go: 0, python: 1 } },
+            { label: 'Small team or solo dev',    scores: { java: 1, go: 2, python: 2 } },
+            { label: 'Data scientists',           scores: { java: 0, go: 0, python: 3 } },
+            { label: 'DevOps / infra engineers',  scores: { java: 1, go: 3, python: 1 } },
+        ],
+    },
+];
+
+const quizResults = {
+    java: {
+        icon: '☕',
+        tagline: 'Go with Java',
+        reason: "Your use case calls for the Java ecosystem's depth — mature frameworks, enterprise tooling, and a massive talent pool. The JVM's decades of production hardening will serve you well.",
+    },
+    go: {
+        icon: '🐹',
+        tagline: 'Go with Go',
+        reason: "Go's single binary, goroutines, and minimal runtime footprint make it the ideal fit for your priorities. It ships fast, scales easily, and ops teams love it.",
+    },
+    python: {
+        icon: '🐍',
+        tagline: 'Go with Python',
+        reason: "Python's rich ecosystem and concise syntax mean you'll move fastest here — especially when data, ML libraries, or rapid prototyping are in the mix.",
+    },
+};
+
+const quizTotals = { java: 0, go: 0, python: 0 };
+let quizStep = 0;
+
+function initQuiz() {
+    quizTotals.java = 0;
+    quizTotals.go = 0;
+    quizTotals.python = 0;
+    quizStep = 0;
+    renderQuizStep();
+}
+
+function renderQuizStep() {
+    const q = quizQuestions[quizStep];
+    const progress = document.getElementById('quiz-progress');
+    const body = document.getElementById('quiz-body');
+
+    progress.innerHTML = quizQuestions.map((_, i) =>
+        `<span class="quiz-dot${i === quizStep ? ' active' : i < quizStep ? ' done' : ''}"></span>`
+    ).join('');
+
+    body.innerHTML = `
+        <p class="quiz-step-label">Question ${quizStep + 1} of ${quizQuestions.length}</p>
+        <p class="quiz-question">${q.text}</p>
+        <div class="quiz-options">
+            ${q.options.map((opt, i) =>
+                `<button class="quiz-opt-btn" onclick="pickOption(${i})">${opt.label}</button>`
+            ).join('')}
+        </div>
+    `;
+
+    const card = document.getElementById('quiz-card');
+    card.classList.remove('quiz-slide-in');
+    void card.offsetWidth;
+    card.classList.add('quiz-slide-in');
+}
+
+function pickOption(optionIndex) {
+    const scores = quizQuestions[quizStep].options[optionIndex].scores;
+    quizTotals.java   += scores.java;
+    quizTotals.go     += scores.go;
+    quizTotals.python += scores.python;
+
+    quizStep++;
+    if (quizStep < quizQuestions.length) {
+        renderQuizStep();
+    } else {
+        renderQuizResult();
+    }
+}
+
+function renderQuizResult() {
+    const winner = Object.keys(quizTotals).reduce((a, b) => quizTotals[a] >= quizTotals[b] ? a : b);
+    const result = quizResults[winner];
+
+    const progress = document.getElementById('quiz-progress');
+    progress.innerHTML = quizQuestions.map(() => `<span class="quiz-dot done"></span>`).join('');
+
+    const body = document.getElementById('quiz-body');
+    body.innerHTML = `
+        <div class="quiz-result ${winner}">
+            <div class="quiz-result-icon">${result.icon}</div>
+            <h3 class="quiz-result-tagline">${result.tagline}</h3>
+            <p class="quiz-result-reason">${result.reason}</p>
+            <div class="quiz-result-actions">
+                <button class="details-btn quiz-explore-btn" onclick="showDetails('${winner}')">Explore ${winner.charAt(0).toUpperCase() + winner.slice(1)}</button>
+                <button class="quiz-restart-btn" onclick="initQuiz()">Start over</button>
+            </div>
+        </div>
+    `;
+
+    const card = document.getElementById('quiz-card');
+    card.classList.remove('quiz-slide-in');
+    void card.offsetWidth;
+    card.classList.add('quiz-slide-in');
+}
+
+initQuiz();
