@@ -487,21 +487,24 @@ function renderCodeBlock(containerId, lang, category) {
     container.innerHTML = `
         <div class="code-block-header">
             <span class="lang-label ${lang}-label">${langDisplayName(lang)}</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <button class="copy-btn" onclick="copyCode(this)" title="Copy to clipboard">${ICON_COPY}</button>
         </div>
         <pre class="code-block"><code>${escapeHtml(getCode(category, lang))}</code></pre>
     `;
 }
+
+const ICON_COPY = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+const ICON_CHECK = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
 
 function copyCode(btn) {
     const wrapper = btn.closest('.comparison-col, .code-block-wrapper');
     const code = wrapper.querySelector('pre code').textContent;
 
     const doFeedback = () => {
-        btn.textContent = 'Copied!';
+        btn.innerHTML = ICON_CHECK;
         btn.classList.add('copy-success');
         setTimeout(() => {
-            btn.textContent = 'Copy';
+            btn.innerHTML = ICON_COPY;
             btn.classList.remove('copy-success');
         }, 2000);
     };
@@ -565,7 +568,7 @@ function showComparison(category, clickedBtn) {
         <div class="comparison-col ${lang}">
             <div class="comparison-col-header">
                 <span class="lang-label ${lang}-label">${langDisplayName(lang)}</span>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <button class="copy-btn" onclick="copyCode(this)" title="Copy to clipboard">${ICON_COPY}</button>
             </div>
             <pre class="code-block"><code>${escapeHtml(getCode(category, lang))}</code></pre>
         </div>

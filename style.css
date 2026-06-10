@@ -531,10 +531,12 @@ footer {
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid var(--card-border);
     color: #94a3b8;
-    font-family: var(--font-main);
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 0.2rem 0.55rem;
+    padding: 0.25rem;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
