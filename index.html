@@ -88,22 +88,22 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Performance</td>
-                            <td>High (JIT Compiled)</td>
-                            <td>Very High (Native)</td>
-                            <td>Low (Interpreted)</td>
+                            <td>Performance <sup>1</sup></td>
+                            <td>High (JIT) <span class="bench-stat">~40K req/s</span></td>
+                            <td>Very High (Native) <span class="bench-stat">~120K req/s</span></td>
+                            <td>Moderate (Interpreted) <span class="bench-stat">~15K req/s</span></td>
                         </tr>
                         <tr>
                             <td>Concurrency</td>
-                            <td>Threads (OS managed)</td>
-                            <td>Goroutines (Lightweight)</td>
-                            <td>AsyncIO / Threads (GIL limited)</td>
+                            <td>OS Threads <span class="bench-stat">~1K per server</span></td>
+                            <td>Goroutines <span class="bench-stat">millions concurrent</span></td>
+                            <td>AsyncIO / GIL <span class="bench-stat">single CPU core</span></td>
                         </tr>
                         <tr>
-                            <td>Memory Management</td>
-                            <td>Garbage Collection (Heavy)</td>
-                            <td>Garbage Collection (Efficient)</td>
-                            <td>Reference Counting + GC</td>
+                            <td>Memory Footprint <sup>2</sup></td>
+                            <td>GC (Heavy) <span class="bench-stat">~200 MB idle</span></td>
+                            <td>GC (Efficient) <span class="bench-stat">~15 MB idle</span></td>
+                            <td>Ref Counting + GC <span class="bench-stat">~45 MB idle</span></td>
                         </tr>
                         <tr>
                             <td>Typing</td>
@@ -112,10 +112,10 @@
                             <td>Dynamic (Strong)</td>
                         </tr>
                         <tr>
-                            <td>Deployment</td>
-                            <td>JAR/WAR (Requires JVM)</td>
-                            <td>Single Static Binary</td>
-                            <td>Source + Dependencies / Docker</td>
+                            <td>Deployment <sup>3</sup></td>
+                            <td>JAR/WAR (JVM) <span class="bench-stat">~5s cold start</span></td>
+                            <td>Single Binary <span class="bench-stat">~10ms cold start</span></td>
+                            <td>Source + Docker <span class="bench-stat">~200ms cold start</span></td>
                         </tr>
                         <tr>
                             <td>Learning Curve</td>
@@ -126,6 +126,12 @@
                     </tbody>
                 </table>
             </div>
+            <p class="table-source">
+                <sup>1</sup> HTTP JSON throughput, typical mid-tier framework —
+                <a href="https://www.techempower.com/benchmarks/" target="_blank" rel="noopener">TechEmpower Benchmarks</a> &nbsp;
+                <sup>2</sup> Idle RSS, simple web server &nbsp;
+                <sup>3</sup> Typical JVM / runtime cold start
+            </p>
         </section>
 
         <section id="quiz-section">

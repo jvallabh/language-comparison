@@ -689,6 +689,33 @@ footer {
     .category-buttons { gap: 0.35rem; }
 }
 
+.bench-stat {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    letter-spacing: 0.3px;
+}
+
+.table-source {
+    margin-top: 0.85rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-align: right;
+    padding-right: 0.25rem;
+}
+
+.table-source a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.table-source a:hover {
+    color: var(--text-color);
+}
+
 /* ── Decision Quiz ─────────────────────────────── */
 #quiz-section {
     width: 100%;
