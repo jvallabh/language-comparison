@@ -659,6 +659,14 @@ footer {
     margin-top: 0.6rem;
 }
 
+.topic-btn:focus-visible,
+.cat-btn:focus-visible,
+.quiz-opt-btn:focus-visible,
+.tab-btn:focus-visible {
+    outline: 2px solid var(--text-muted);
+    outline-offset: 2px;
+}
+
 .comparison-grid-scroll {
     position: relative;
 }

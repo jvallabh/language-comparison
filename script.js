@@ -460,6 +460,12 @@ function showDetails(lang) {
     `;
 
     modalContent.querySelectorAll('.code-snippet code').forEach(el => hljs.highlightElement(el));
+    const catContainer = modalContent.querySelector('.category-buttons');
+    if (catContainer) {
+        catContainer.setAttribute('role', 'toolbar');
+        catContainer.setAttribute('aria-label', 'Code example categories');
+        setupArrowNav(catContainer, '.cat-btn');
+    }
     renderCodeBlock('code-display-' + lang, lang, categories[0]);
     const overlay = document.getElementById('details-overlay');
     overlay.classList.remove('closing');
@@ -477,11 +483,38 @@ function showTab(panel, lang, clickedBtn) {
 }
 
 function showCategory(lang, category, clickedBtn) {
-    clickedBtn.closest('.category-buttons')
-        .querySelectorAll('.cat-btn')
-        .forEach(b => b.classList.remove('active'));
+    const container = clickedBtn.closest('.category-buttons');
+    container.querySelectorAll('.cat-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('tabindex', '-1');
+    });
     clickedBtn.classList.add('active');
+    clickedBtn.setAttribute('tabindex', '0');
     renderCodeBlock('code-display-' + lang, lang, category);
+}
+
+function setupArrowNav(container, btnClass) {
+    const sync = () =>
+        container.querySelectorAll(btnClass).forEach(b =>
+            b.setAttribute('tabindex', b.classList.contains('active') ? '0' : '-1'));
+    sync();
+    container.addEventListener('keydown', (e) => {
+        const btns = Array.from(container.querySelectorAll(btnClass));
+        const idx = btns.findIndex(b => b === document.activeElement);
+        if (idx === -1) return;
+        let next = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (idx + 1) % btns.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp')  next = (idx - 1 + btns.length) % btns.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End')  next = btns.length - 1;
+        if (next !== -1) {
+            e.preventDefault();
+            btns[next].focus();
+            btns[next].click();
+            sync();
+        }
+    });
+    return sync;
 }
 
 function renderCodeBlock(containerId, lang, category) {
@@ -554,6 +587,8 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+let syncTopicTabindex = null;
+
 function initComparison() {
     const selector = document.getElementById('comparison-topic-selector');
     if (!selector) return;
@@ -567,12 +602,16 @@ function initComparison() {
         selector.appendChild(btn);
     });
 
+    selector.setAttribute('role', 'toolbar');
+    selector.setAttribute('aria-label', 'Code comparison topics');
+    syncTopicTabindex = setupArrowNav(selector, '.topic-btn');
     showComparison(categories[0], selector.firstElementChild);
 }
 
 function showComparison(category, clickedBtn) {
     document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
     clickedBtn.classList.add('active');
+    if (syncTopicTabindex) syncTopicTabindex();
 
     const grid = document.getElementById('comparison-grid');
     grid.innerHTML = ['java', 'go', 'python'].map(lang => `
