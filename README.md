@@ -1,38 +1,40 @@
 # Language Showdown: Java vs Go vs Python
 
-A premium, interactive web page comparing three of the most popular backend programming languages: **Java**, **Go (Golang)**, and **Python**.
-
-## Overview
-
-This project provides a visual and interactive comparison of these languages, highlighting their:
--   **Pros & Cons**: Detailed breakdowns of strengths and weaknesses.
--   **Code Examples**: Real-world syntax snippets across multiple categories.
--   **Use Cases**: Best scenarios for each language.
--   **Head-to-Head Comparison**: A side-by-side table covering performance, concurrency, memory management, and more.
+An interactive web page comparing three popular backend programming languages: **Java**, **Go (Golang)**, and **Python**.
 
 ## Features
 
--   **Interactive Cards**: Click "Explore" to reveal deep dives into each language.
--   **Tabbed Modals**: Each language modal has an Overview tab (pros/cons/use cases) and a Code Examples tab.
--   **Code Example Categories**: Browse HTTP Server, File I/O, Concurrency, Error Handling, and JSON Parsing snippets per language.
--   **Side-by-Side Code Comparison**: Select a topic to see all three languages' implementations displayed simultaneously.
--   **Copy to Clipboard**: One-click copy on every code block.
--   **Comparison Table**: A comprehensive grid for quick reference.
--   **Premium Design**: Dark mode aesthetic, glassmorphism effects, and smooth animations.
--   **Responsive**: Optimized for desktop and mobile viewing.
+**Exploration**
+- **Language Cards** — click "Explore" to open a modal with pros, cons, use cases, and code examples
+- **Tabbed Modals** — Overview and Code Examples tabs per language
+- **Code Categories** — HTTP Server, File I/O, Concurrency, Error Handling, JSON Parsing
+
+**Comparison**
+- **Head-to-Head Table** — performance, concurrency, memory, typing, deployment, and learning curve with real benchmark numbers (TechEmpower, startup times, idle RSS)
+- **Side-by-Side Code Comparison** — pick a topic to see all three implementations at once
+- **"When to Choose" Quiz** — 3-question decision helper that recommends the best language for your use case
+
+**Usability**
+- **Light/Dark Mode** — toggle button respects `prefers-color-scheme` on first visit and persists via `localStorage`
+- **Syntax Highlighting** — highlight.js with atom-one-dark theme across all code blocks
+- **Copy to Clipboard** — SVG clipboard icon on every code block, swaps to a checkmark on success
+- **Keyboard Navigation** — arrow keys navigate topic and category button groups (roving tabindex)
+- **Smooth Animations** — modal fades/slides in on open and out on close
+- **Mobile Scroll** — comparison grid scrolls horizontally on small screens, one column per swipe
+- **Styled Scrollbars** — thin 4px scrollbar on code blocks matching the dark aesthetic
 
 ## How to Run
 
-Since this is a static web page, no build process or server is required.
+No build process or server required — it's a static page.
 
-1.  Navigate to the project directory:
-    ```bash
-    cd language-comparison
-    ```
-2.  Open `index.html` in your preferred web browser.
+```bash
+open index.html
+```
 
-## Technologies Used
+Or just double-click `index.html` in Finder.
 
--   **HTML5**: Semantic structure.
--   **CSS3**: Custom styling, animations, and responsive design (no frameworks).
--   **JavaScript (ES6+)**: Logic for interactivity and dynamic content rendering.
+## Stack
+
+- **HTML5** / **CSS3** / **JavaScript (ES6+)** — no frameworks
+- **highlight.js 11.9** (CDN) — syntax highlighting
+- **Google Fonts** — Outfit typeface
